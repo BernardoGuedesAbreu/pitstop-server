@@ -28,3 +28,4 @@ const resultSchema = new Schema({
 const Result = model("Result", resultSchema);
 
 module.exports = Result;
+
