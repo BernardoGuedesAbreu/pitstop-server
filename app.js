@@ -12,7 +12,7 @@ require("./db");
 // https://www.npmjs.com/package/express
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
-const app = express();  
+const app = express();
 require("./config")(app);
 
 // 👇 Start handling routes here
@@ -20,13 +20,21 @@ const indexRoutes = require("./routes/index.routes");
 app.use("/api", indexRoutes);
 
 const authRoutes = require("./routes/auth.routes");
-app.use("/auth", authRoutes);
+app.use("/api", authRoutes);
 
 const dashboardRoutes = require("./routes/dashboard.routes");
-app.use("/", dashboardRoutes);
+app.use("/api", dashboardRoutes);
+
+const circuitRoutes = require("./routes/circuits.routes");
+app.use("/api", circuitRoutes);
+
+const driverRoutes = require("./routes/drivers.routes");
+app.use("/api", driverRoutes);
+
+const constructorRoutes = require("./routes/constructors.routes");
+app.use("/api", constructorRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that y    ou handle in specific routes
 require("./error-handling")(app);
-
 
 module.exports = app;
