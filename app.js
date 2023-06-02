@@ -34,6 +34,9 @@ app.use("/api", driverRoutes);
 const constructorRoutes = require("./routes/constructors.routes");
 app.use("/api", constructorRoutes);
 
+const resultsRoutes = require("./routes/results.routes");
+app.use("/api", resultsRoutes);
+
 // ❗ To handle errors. Routes that don't exist or errors that y    ou handle in specific routes
 require("./error-handling")(app);
 
