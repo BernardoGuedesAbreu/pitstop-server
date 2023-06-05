@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/User.model");
 const Driver = require("../models/Driver.model");
 const { isAuthenticated } = require('../middleware/jwt.middleware');
+const { Types } = require('mongoose');
 
 //ALL DRIVERS ROUTE
 router.get("/drivers", async (req, res) => {
@@ -61,6 +62,33 @@ router.post('/drivers', isAuthenticated, async (req, res) => {
     catch(error){
         res.json(error);
     }
+});
+
+// DELETE A DRIVER BY ID (ADMIN ONLY)
+router.delete('/drivers/:driverId', isAuthenticated, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (user.role !== 'admin') {
+      return res.status(403).json({ message: 'Unauthorized' });
+    }
+
+    const { driverId } = req.params;
+
+    if (!Types.ObjectId.isValid(driverId)) {
+      return res.status(400).json({ message: 'Invalid driver ID' });
+    }
+
+    const deletedDriver = await Driver.findByIdAndDelete(driverId);
+
+    if (!deletedDriver) {
+      return res.status(404).json({ message: 'Driver not found' });
+    }
+
+    res.json({ message: 'Driver deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 module.exports = router;
