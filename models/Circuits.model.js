@@ -4,8 +4,8 @@ const circuitSchema = new Schema({
   circuitId: { type: String, required: true },
   circuitName: { type: String, required: true },
   location: {
-    lat: { type: Number, required: true },
-    long: { type: Number, required: true },
+    lat: { type: Number},
+    long: { type: Number},
     locality: { type: String },
     country: { type: String },
   },
