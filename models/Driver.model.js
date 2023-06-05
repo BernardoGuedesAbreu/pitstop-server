@@ -6,7 +6,8 @@ const driverSchema = new Schema({
     givenName: String,
     familyName: String,
     dateOfBirth: Date,
-    nationality: String
+    nationality: String,
+    bio:String,
   });
 
   const Driver = model("Driver",driverSchema);
