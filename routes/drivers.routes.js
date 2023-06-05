@@ -90,5 +90,36 @@ router.delete('/drivers/:driverId', isAuthenticated, async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+// UPDATE A DRIVER BY ID (ADMIN ONLY)
+router.put('/drivers/:driverId', isAuthenticated, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (user.role !== 'admin') {
+      return res.status(403).json({ message: 'Unauthorized' });
+    }
+
+    const { driverId } = req.params;
+    const { givenName, familyName, dateOfBirth, nationality } = req.body;
+
+    if (!Types.ObjectId.isValid(driverId)) {
+      return res.status(400).json({ message: 'Invalid driver ID' });
+    }
+
+    const updatedDriver = await Driver.findByIdAndUpdate(
+      driverId,
+      { givenName, familyName, dateOfBirth, nationality },
+      { new: true }
+    );
+
+    if (!updatedDriver) {
+      return res.status(404).json({ message: 'Driver not found' });
+    }
+
+    res.json({ driver: updatedDriver });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 module.exports = router;
