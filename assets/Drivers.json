@@ -1,9 +1,4 @@
-[{
-  "_id": {
-    "$oid": "6479f8add717219dc33973a8"
-  },
-  "season": "2019",
-  "Drivers": [
+[
     {
       "driverId": "albon",
       "permanentNumber": "23",
@@ -205,4 +200,3 @@
       "nationality": "German"
     }
   ]
-}]
