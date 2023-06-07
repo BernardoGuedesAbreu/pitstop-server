@@ -90,7 +90,7 @@ router.delete("/drivers/:driverId", isAuthenticated, async (req, res) => {
   }
 });
 // UPDATE A DRIVER BY ID (ADMIN ONLY)
-router.put("/drivers/:driverId", isAuthenticated, async (req, res) => {
+router.put("/drivers/edit/:driverId", isAuthenticated, async (req, res) => {
   const id = req.payload._id;
   try {
     const user = await User.findById(id);
