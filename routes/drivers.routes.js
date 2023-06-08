@@ -26,7 +26,7 @@ router.post("/drivers", isAuthenticated, async (req, res) => {
       return res.status(403).json({ message: "Unauthorized" });
     }
 
-    const { driverId, givenName, familyName, dateOfBirth, nationality } =
+    const { driverId, givenName, familyName, dateOfBirth, nationality, url } =
       req.body;
 
     const newDriver = new Driver({
@@ -35,6 +35,7 @@ router.post("/drivers", isAuthenticated, async (req, res) => {
       familyName,
       dateOfBirth,
       nationality,
+      url
     });
 
     const savedDriver = await newDriver.save();

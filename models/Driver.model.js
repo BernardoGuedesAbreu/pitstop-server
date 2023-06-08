@@ -7,7 +7,10 @@ const driverSchema = new Schema({
     familyName: String,
     dateOfBirth: Date,
     nationality: String,
-    bio:String,
+    url: {
+      type: String,
+      default: "../2019-drivers/Yuki-png"
+    },
   });
 
   const Driver = model("Driver",driverSchema);
