@@ -9,7 +9,7 @@ const driverSchema = new Schema({
     nationality: String,
     url: {
       type: String,
-      default: "../2019-drivers/Yuki-png"
+      default: "https://cdn.discordapp.com/attachments/1095737455967207474/1116313105945858048/logo-f1.png"
     },
   });
 
